@@ -11,9 +11,7 @@ const Wrapper = styled.div`
   margin:0;
   padding-top: 51px; 
   padding-bottom: 148px;
-  @media screen and (max-width: 1279px) {
-    /* margin:0 20px; */
-  }
+  
 `;
 const Container = styled.div`
   margin: 0 auto;
@@ -25,11 +23,14 @@ const Container = styled.div`
   }
 `;
 
-const PaymentPanel=styled.div`
-width:100%;
-display: flex;
-flex-direction: column;
-`
+const PaymentPanel = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width: 1279px) {
+    padding:0 30px;
+  }
+`;
 
 const FormFieldSet = styled.fieldset`
   margin-top: 50px;
@@ -137,6 +138,7 @@ const SubtotalPrice = styled(Price)`
   margin-top: 40px;
   @media screen and (max-width: 1279px) {
     margin-top: 24px;
+    width:240px;
   }
 `;
 
@@ -145,6 +147,7 @@ const ShippingPrice = styled(Price)`
   margin-bottom: 20px;
   @media screen and (max-width: 1279px) {
     padding-bottom: 4px;
+    width: 240px;
   }
 `;
 
@@ -153,6 +156,7 @@ const TotalPrice = styled(Price)`
   border-top: 1px solid #3f3a3a;
   @media screen and (max-width: 1279px) {
     margin-top: 20px;
+    width: 240px;
   }
 `;
 
@@ -190,6 +194,9 @@ const Button = styled.button`
   font-size: 20px;
   letter-spacing: 4px;
   margin-left: auto;
+  @media screen and (max-width: 1279px) {
+    width:100%;
+  }
 `;
 
 const formInputs = [
