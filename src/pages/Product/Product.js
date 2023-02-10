@@ -14,19 +14,34 @@ const Container = styled.div`
   margin: 65px auto 49px;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width:1279px){
+    margin-top: 0;
+    width: 100%;
+  }
 `;
 
 const ProductInformDiv = styled.div`
   display: flex;
   column-gap: 40px;
+  @media screen and (max-width: 1279px) {
+    flex-direction: column;
+  }
 `;
 const ProductImg = styled.img`
   width: 560px;
   height: 746.67px;
+  @media screen and (max-width: 1279px) {
+    width:100%;
+    height:auto;
+  }
 `;
 const ProductSelectPanel = styled.div`
   display: flex;
   flex-direction: column;
+  @media screen and (max-width:1279px){
+    margin: 17px auto 28px;
+    width:calc(100% - 48px);
+  }
 `;
 const ProductTitle = styled.div`
 font-size: 32px;
@@ -60,13 +75,17 @@ font-size: 20px;
 line-height: 30px;
 `
 
-const ProductDescription=styled.div`
-margin-top: 50px;
-/* margin-bottom: 28px; */
-display: flex;
-flex-direction: column;
-row-gap: 30px;
-`
+const ProductDescription = styled.div`
+  margin-top: 50px;
+  /* margin-bottom: 28px; */
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  @media screen and (max-width: 1279px) {
+    margin: 0 auto;
+    width:calc(100% - 48px);
+  }
+`;
 const DescriptionTitleDiv = styled.div`
   width: 100%;
   display: flex;
@@ -89,10 +108,13 @@ const DescriptionText=styled.div`
 font-size: 20px;
 line-height: 30px;
 `
-const ProductPhotoDiv=styled.img`
-width:100%;
-height:540px;
-`
+const ProductPhotoDiv = styled.img`
+  width: 100%;
+  height: 540px;
+  @media screen and (max-width: 1279px) {
+    height:auto
+  }
+`;
 function Product() {
   const [product, setProduct] = useState();
   const { id } = useParams();

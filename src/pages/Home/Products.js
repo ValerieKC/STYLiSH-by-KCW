@@ -9,21 +9,31 @@ const Wrapper = styled.div`
 `;
 const Container = styled.div`
   margin: 70px auto 110px;
-  width: 1160px;
+  /* width: 1160px; */
+  max-width: 1200px;
   display: flex;
   flex-wrap: wrap;
   column-gap: 40px;
   row-gap: 64px;
+  @media screen and (max-width: 1279px) {
+    margin: 15px auto 30px;
+    width: calc(100% - 48px);
+    column-gap: 6px;
+    row-gap: 24px;
+  }
 `;
 
 const ProductDiv = styled(Link)`
-  width: fit-content;
+  width: calc((100% - 80px) / 3);
   text-decoration: none;
+  @media screen and (max-width: 1279px) {
+    width: calc((100% - 6px) / 2);
+  }
 `;
 
 const ProductImg = styled.img`
-  width: 360px;
-  height: 480px;
+  width: 100%;
+  
 `;
 const ColorDiv = styled.div`
   margin-top: 20px;
@@ -39,6 +49,10 @@ const ColorSquare = styled.div`
   border: #d3d3d3;
   background-color: #${(props) => props.colorCode};
   cursor: pointer;
+  @media screen and (max-width: 1279px) {
+    width: 12px;
+    height: 12px;
+  }
 `;
 const ProductText = styled.div`
   margin-top: 20px;
@@ -47,12 +61,24 @@ const ProductText = styled.div`
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 4px;
+  @media screen and (max-width: 1279px) {
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 2.4px;
+  }
 `;
 const ProductPrice = styled.div`
   color: #3f3a3a;
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 4px;
+  @media screen and (max-width: 1279px) {
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 2.4px;
+  }
 `;
 
 const Animation = keyframes`

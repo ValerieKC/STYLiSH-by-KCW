@@ -6,22 +6,34 @@ import Swal from "sweetalert2";
 const ProductOptionDiv = styled.div`
   display: flex;
   margin-bottom: 30px;
+  @media screen and (max-width:1279px){
+    /* width:100%; */
+  }
 `;
 const ProductOptionText = styled.div`
   margin-right: 24px;
-  width: 68px;
   display: flex;
   align-items: center;
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 4px;
+  @media screen and (max-width: 1279px) {
+    margin-right: 24px;
+    width: 68px;
+
+    line-height: 17px;
+    font-size: 14px;
+    letter-spacing: 2.8px;
+  }
 `;
 const ProductOptionPanel = styled.div`
-  width: 160px;
   display: flex;
-  column-gap: 26px;
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 const ColorOuterSquare = styled.div`
+margin-right: 20px;
   width: 36px;
   height: 36px;
   display: flex;
@@ -58,11 +70,15 @@ const SizeCircle = styled.div`
 `;
 
 const AmountSelectDiv = styled.div`
-  width: 100%;
+  /* width: 100%; */
+  width: 160px;
   height: 44px;
   display: flex;
   justify-content: space-between;
   border: 1px solid #979797;
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 
 const AmountSelectBtn = styled.div`
@@ -71,12 +87,19 @@ const AmountSelectBtn = styled.div`
   line-height: 44px;
   text-align: center;
   cursor: pointer;
+  @media screen and (max-width: 1279px) {
+    width: 70px;
+  }
 `;
 const AmountSelectNumber = styled.div`
+  width: 100px;
   font-size: 16px;
   line-height: 44px;
   color: #8b572a;
   text-align: center;
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 
 const AddToCartBtn = styled.div`
@@ -90,6 +113,9 @@ const AddToCartBtn = styled.div`
   color: #ffffff;
   text-align: center;
   cursor: pointer;
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 
 function ProductVariants({ product }) {

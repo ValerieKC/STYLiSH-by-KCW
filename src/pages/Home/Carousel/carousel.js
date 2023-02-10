@@ -3,6 +3,7 @@ import carousel from "./carousel.png";
 
 const CarouselDiv = styled.div`
   width: 100%;
+ 
   height: 500px;
   background-image: url(${carousel});
   background-size: cover;
@@ -23,6 +24,7 @@ const TextDiv = styled.div`
   line-height: 57px;
 
   @media screen and (max-width: 1279px) {
+    max-width: 360px;
     padding-top: 30px;
     padding-left: 23px;
     font-size: 15px;
