@@ -12,15 +12,17 @@ const Wrapper = styled.div`
   padding-top: 51px; 
   padding-bottom: 148px;
   @media screen and (max-width: 1279px) {
-    margin:0 20px;
+    /* margin:0 20px; */
   }
 `;
 const Container = styled.div`
   margin: 0 auto;
   max-width: 1160px;
-
   font-size: 16px;
   line-height: 19px;
+  @media screen and (max-width: 1279px) {
+    
+  }
 `;
 
 const PaymentPanel=styled.div`
@@ -49,7 +51,15 @@ const FormGroup = styled.div`
   flex-wrap: wrap;
   margin-top: 30px;
   width: 684px;
-  
+   @media screen and (max-width: 1279px) {
+    line-height: 17px;
+    font-size: 14px;
+    margin-top: 20px;
+    width: 100%;
+    ${FormLegend} + & {
+      margin-top: 20px;
+    }
+  }
 `;
 
 const FormLabel = styled.label`
@@ -58,7 +68,9 @@ const FormLabel = styled.label`
   font-size: 16px;
   color: #3f3a3a;
   display: block;
-  
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+  }
 `;
 
 const FormControl = styled.input`
@@ -66,7 +78,10 @@ const FormControl = styled.input`
   height: 30px;
   border-radius: 8px;
   border: solid 1px ${({ invalid }) => (invalid ? "#CB4042" : "#979797")};
-  
+  @media screen and (max-width: 1279px) {
+    margin-top: 10px;
+    width: 100%;
+  }
 `;
 
 const FormText = styled.div`
