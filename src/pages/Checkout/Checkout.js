@@ -240,6 +240,7 @@ function Checkout() {
    const [cartItems,setCartItems]=useState(JSON.parse(localStorage.getItem("cart")) || [])
    const [invalidFields, setInvalidFields] = useState([]);
    const [loading, setLoading] = useState(false);
+   const [subtotal,setSubtotal]=useState(0)
    const navigate = useNavigate();
    const cardNumberRef = useRef();
    const cardExpirationDateRef = useRef();
@@ -257,6 +258,7 @@ function Checkout() {
      }
    }
 
+
 useEffect(() => {
   const setupTappay = async () => {
     await tappay.setupSDK();
@@ -269,14 +271,8 @@ useEffect(() => {
   setupTappay();
 }, []);
 
-const subtotal = cartItems.reduce(
-  (prev, item) => prev + item.price * item.qty,
-  0
-);
-
 let freight;
 cartItems.length === 0 ? (freight = 0) : (freight = 30);
-
 
 async function checkout() {
   try {
@@ -343,7 +339,11 @@ async function checkout() {
   return (
     <Wrapper>
       <Container>
-        <Cart />
+        <Cart
+          cartItems={cartItems}
+          setCartItems={setCartItems}
+          setSubtotal={setSubtotal}
+        />
         <PaymentPanel>
           <form ref={formRef}>
             <FormFieldSet>
@@ -417,7 +417,7 @@ async function checkout() {
           <TotalPrice>
             <PriceName>應付金額</PriceName>
             <Currency>NT.</Currency>
-            <PriceValue>{subtotal+freight}</PriceValue>
+            <PriceValue>{subtotal + freight}</PriceValue>
           </TotalPrice>
           <Button onClick={checkout}>結帳</Button>
         </PaymentPanel>

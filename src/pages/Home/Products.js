@@ -9,7 +9,6 @@ const Wrapper = styled.div`
 `;
 const Container = styled.div`
   margin: 70px auto 110px;
-  /* width: 1160px; */
   max-width: 1200px;
   display: flex;
   flex-wrap: wrap;
@@ -92,11 +91,15 @@ const Animation = keyframes`
 
 const LoadingDiv = styled.div`
   height: 604.5px;
+ 
 `;
 const LoadingImg = styled.div`
   width: 360px;
   height: 480px;
   animation: ${Animation} 0.5s linear infinite alternate;
+  @media screen and (max-width: 1279px) {
+    width: calc((100% - 6px) / 2);
+  }
 `;
 
 const LoadingColorDiv = styled(ColorDiv)`
@@ -106,6 +109,13 @@ const LoadingColorDiv = styled(ColorDiv)`
 const LoadingColorSquare = styled(ColorSquare)`
   animation: ${Animation} 0.5s linear infinite alternate;
 `;
+
+const NoSearchResult=styled.div`
+width: 100%;
+font-size: 40px;
+text-align: center;
+`
+
 
 const skeletonDivNum = Array.from({ length: 6 }, (_, index) => index);
 
@@ -157,35 +167,40 @@ function Products() {
   return (
     <Wrapper>
       <Container>
-        {isLoading&&products.length===0
-          && skeletonDivNum.map((item) => {
-              return (
-                <LoadingDiv key={item}>
-                  <LoadingImg />
-                  <LoadingColorDiv>
-                    {skeletonColorDivNum.map((item) => {
-                      return <LoadingColorSquare key={item} />;
-                    })}
-                  </LoadingColorDiv>
-                </LoadingDiv>
-              );
-            })}
-           {products?.map(({ id, main_image, colors, title, price }) => {
-              return (
-                <ProductDiv key={id} to={`/products/${id}`}>
-                  <ProductImg src={main_image} />
-                  <ColorDiv>
-                    {colors.map(({ code }) => {
-                      return <ColorSquare colorCode={`${code}`} key={code} />;
-                    })}
-                  </ColorDiv>
-                  <ProductText>{title}</ProductText>
-                  <ProductPrice>TWD.{price}</ProductPrice>
-                </ProductDiv>
-              );
-            })}
+        {isLoading &&
+          products.length === 0 &&
+          skeletonDivNum.map((item) => {
+            return (
+              <LoadingDiv key={item}>
+                <LoadingImg />
+                <LoadingColorDiv>
+                  {skeletonColorDivNum.map((item) => {
+                    return <LoadingColorSquare key={item} />;
+                  })}
+                </LoadingColorDiv>
+              </LoadingDiv>
+            );
+          })}
+        {products.length === 0 ? (
+          <NoSearchResult>查無此商品</NoSearchResult>
+        ) : (
+          products?.map(({ id, main_image, colors, title, price }) => {
+            return (
+              <ProductDiv key={id} to={`/products/${id}`}>
+                <ProductImg src={main_image} />
+                <ColorDiv>
+                  {colors.map(({ code }) => {
+                    return <ColorSquare colorCode={`${code}`} key={code} />;
+                  })}
+                </ColorDiv>
+                <ProductText>{title}</ProductText>
+                <ProductPrice>TWD.{price}</ProductPrice>
+              </ProductDiv>
+            );
+          })
+        )}
       </Container>
-     </Wrapper>
+    </Wrapper>
   );
 }
 

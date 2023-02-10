@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import deleteSign from "./cart-remove.png";
 import deleteHover from "./cart-remove-hover.png";
 
@@ -85,7 +87,6 @@ const ProductDiv = styled.div`
 `;
 const ProductDetailPanel = styled.div`
   display: flex;
-  
 `;
 
 const ProductImg = styled.img`
@@ -137,7 +138,7 @@ const PriceDiv = styled.div`
 `;
 
 const TrashDiv = styled.div`
-display: flex;
+  display: flex;
   width: 44px;
   height: 44px;
   background-image: url(${deleteSign});
@@ -164,12 +165,21 @@ const MobileTrashDiv = styled.div`
   @media screen and (max-width: 1279px) {
     display: flex;
     position: absolute;
-    right:0;
+    right: 0;
   }
 `;
 
-function Cart(){
-  const [cartItems,setCartItems]=useState(JSON.parse(localStorage.getItem("cart")) || [])
+function Cart({ cartItems, setCartItems, setSubtotal }) {
+  const { order, setOrder } = useOutletContext();
+  // const [cartItems,setCartItems]=useState(JSON.parse(localStorage.getItem("cart")) || [])
+
+  useEffect(()=>{
+    const total = cartItems.reduce(
+      (prev, item) => prev + item.price * item.qty,
+      0
+    );
+    setSubtotal(total)
+  },[cartItems, setSubtotal])
 
   function changeItemQuantity(itemIndex, itemQuantity) {
     const newCartItems = cartItems.map((item, index) =>
@@ -182,17 +192,25 @@ function Cart(){
     );
     setCartItems(newCartItems);
     localStorage.setItem("cart", JSON.stringify(newCartItems));
-    window.alert("已修改數量");
+    // window.alert("已修改數量");
+    Swal.fire({
+      icon: "warning",
+      text: "已修改數量",
+    });
   }
-
+  // console.log(cartItems);
   function deleteItem(itemIndex) {
     const newCartItems = cartItems.filter((_, index) => index !== itemIndex);
     setCartItems(newCartItems);
+    setOrder(newCartItems.length);
+
     localStorage.setItem("cart", JSON.stringify(newCartItems));
-    window.alert("已刪除商品");
+    Swal.fire({
+      icon: "warning",
+      text: "已刪除商品",
+    });
   }
-  
-  console.log(cartItems)
+
   return (
     <>
       <Title>
@@ -208,7 +226,7 @@ function Cart(){
         {cartItems.map((item, index) => {
           const stock = Array.from({ length: item.stock }, (_, index) => index);
           return (
-            <ProductDiv key={`${item.id}-${item.size}-${item.color}`}>
+            <ProductDiv key={`${item.id}-${item.size}-${item.color.code}`}>
               <ProductDetailPanel>
                 <ProductImg src={item.image} />
                 <ProductDetail>
@@ -223,7 +241,6 @@ function Cart(){
                 <TitleAmount>數量</TitleAmount>
                 <TitlePrice>單價</TitlePrice>
                 <TitlePrice>小計</TitlePrice>
-                {/* <TitleBlank></TitleBlank> */}
               </MobileTitlePurchaseList>
               <PurchaseList>
                 <QuantitySelect
@@ -246,4 +263,4 @@ function Cart(){
   );
 }
 
-export default Cart
+export default Cart;
