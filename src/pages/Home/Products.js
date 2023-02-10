@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import api from "../../utils/api";
 
-
 const Wrapper = styled.div`
   width: 100%;
 `;
@@ -32,7 +31,6 @@ const ProductDiv = styled(Link)`
 
 const ProductImg = styled.img`
   width: 100%;
-  
 `;
 const ColorDiv = styled.div`
   margin-top: 20px;
@@ -90,32 +88,41 @@ const Animation = keyframes`
 `;
 
 const LoadingDiv = styled.div`
-  height: 604.5px;
- 
-`;
-const LoadingImg = styled.div`
-  width: 360px;
-  height: 480px;
-  animation: ${Animation} 0.5s linear infinite alternate;
+  width: calc((100% - 80px) / 3);
   @media screen and (max-width: 1279px) {
     width: calc((100% - 6px) / 2);
   }
 `;
+const LoadingImg = styled.div`
+  width: 100%;
+  aspect-ratio: 0.75;
+  animation: ${Animation} 0.5s linear infinite alternate;
+  @media screen and (max-width: 1279px) {
+  }
+`;
 
-const LoadingColorDiv = styled(ColorDiv)`
-  
+const LoadingColorDiv = styled(ColorDiv)``;
+
+const LoadingProductText = styled(ProductText)`
+  width: 164px;
+  height: 24px;
+  animation: ${Animation} 0.5s linear infinite alternate;
+`;
+const LoadingProductPrice = styled(ProductPrice)`
+  width: 107px;
+  height: 24px;
+  animation: ${Animation} 0.5s linear infinite alternate;
 `;
 
 const LoadingColorSquare = styled(ColorSquare)`
   animation: ${Animation} 0.5s linear infinite alternate;
 `;
 
-const NoSearchResult=styled.div`
-width: 100%;
-font-size: 40px;
-text-align: center;
-`
-
+const NoSearchResult = styled.div`
+  width: 100%;
+  font-size: 40px;
+  text-align: center;
+`;
 
 const skeletonDivNum = Array.from({ length: 6 }, (_, index) => index);
 
@@ -149,7 +156,10 @@ function Products() {
     }
 
     async function scrollHandler() {
-      if (window.innerHeight + window.scrollY - document.body.offsetHeight <= 10) {
+      if (
+        window.innerHeight + window.scrollY - document.body.offsetHeight <=
+        10
+      ) {
         if (nextPaging === undefined) return;
         if (isFetching) return;
 
@@ -169,18 +179,20 @@ function Products() {
       <Container>
         {isLoading &&
           products.length === 0 &&
-          skeletonDivNum.map((item) => {
-            return (
-              <LoadingDiv key={item}>
-                <LoadingImg />
-                <LoadingColorDiv>
-                  {skeletonColorDivNum.map((item) => {
-                    return <LoadingColorSquare key={item} />;
-                  })}
-                </LoadingColorDiv>
-              </LoadingDiv>
-            );
-          })}
+        skeletonDivNum.map((item) => {
+          return (
+            <LoadingDiv key={item}>
+              <LoadingImg />
+              <LoadingColorDiv>
+                {skeletonColorDivNum.map((item) => {
+                  return <LoadingColorSquare key={item} />;
+                })}
+              </LoadingColorDiv>
+              <LoadingProductText />
+              <LoadingProductPrice />
+            </LoadingDiv>
+          );
+        })}
         {products.length === 0 ? (
           <NoSearchResult>查無此商品</NoSearchResult>
         ) : (

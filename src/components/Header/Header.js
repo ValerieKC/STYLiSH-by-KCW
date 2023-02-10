@@ -89,6 +89,10 @@ const CategoryBtn = styled.div`
 
   @media screen and (max-width: 1279px) {
     align-items: center;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0;
+    text-indent: 0;
     &:hover {
       color: #fff;
     }

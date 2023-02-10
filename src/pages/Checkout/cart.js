@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useOutletContext } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Swal from "sweetalert2";
 import deleteSign from "./cart-remove.png";
 import deleteHover from "./cart-remove-hover.png";
@@ -170,8 +170,7 @@ const MobileTrashDiv = styled.div`
 `;
 
 function Cart({ cartItems, setCartItems, setSubtotal }) {
-  const { order, setOrder } = useOutletContext();
-  // const [cartItems,setCartItems]=useState(JSON.parse(localStorage.getItem("cart")) || [])
+  const { setOrder } = useOutletContext();
 
   useEffect(()=>{
     const total = cartItems.reduce(
@@ -235,7 +234,7 @@ function Cart({ cartItems, setCartItems, setSubtotal }) {
                   <PropertyText>顏色 | {item.color.name}</PropertyText>
                   <PropertyText>尺寸 | {item.size}</PropertyText>
                 </ProductDetail>
-                <MobileTrashDiv />
+                <MobileTrashDiv onClick={() => deleteItem(index)} />
               </ProductDetailPanel>
               <MobileTitlePurchaseList>
                 <TitleAmount>數量</TitleAmount>

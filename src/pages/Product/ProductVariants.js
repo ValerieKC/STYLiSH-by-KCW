@@ -122,7 +122,7 @@ function ProductVariants({ product }) {
   const [selectedColor, setSelectedColor] = useState(product.colors[0].code);
   const [selectedSize, setSelectedSize] = useState();
   const [quantity, setQuantity] = useState(1);
-  const { order, setOrder } = useOutletContext();
+  const { setOrder } = useOutletContext();
 
 
   function getStock(colorCode, size) {

@@ -246,7 +246,7 @@ function Checkout() {
    const cardExpirationDateRef = useRef();
    const cardCCVRef = useRef();
    const formRef = useRef();
-   const { order, setOrder } = useOutletContext();
+   const { setOrder } = useOutletContext();
 
    function checkInputFormat(item, e) {
      if (e.target.value === "") return;
