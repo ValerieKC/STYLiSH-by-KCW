@@ -1,24 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+import { Reset } from "styled-reset";
+import Header from "./components/Header/Header";
+import Footer from "./components/footer";
+
+const GlobalStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+    overflow-y:scroll ;
+     scrollbar-width: none;
+    ::-webkit-scrollbar {
+      display: none; /* for Chrome, Safari, and Opera */
+    }
+  }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    
+  }
+
+  #root {
+    min-height: 100vh;
+    padding: 140px 0 115px;
+    position: relative;
+           
+  }
+`;
 
 function App() {
+  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const [order, setOrder] = useState(cartItems.length);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Reset />
+      <GlobalStyle />
+      <Header order={order} />
+      <Outlet context={{ order, setOrder }} />
+      <Footer />
+    </>
   );
 }
 
